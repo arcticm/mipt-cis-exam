@@ -310,7 +310,10 @@ def main():
     print(suffix_array)
 
     while True:
-        pattern = input()
+        try:
+            pattern = input()
+        except EOFError:
+            break
         #search the pattern
         suffix_array_id = binary_search(text, suffix_array, pattern, lcp_left_right)
         count = count_results(suffix_array_id, len(pattern), lcp)
