@@ -1,5 +1,3 @@
-import timeit
-
 # create suffix array
 
 def create_suffix_array(text):
@@ -309,13 +307,16 @@ def main():
     inversed_suffix_array = create_inverse_suffix_array(len(text), suffix_array)
     lcp = create_lcp(text, suffix_array, inversed_suffix_array)
     lcp_left_right = precompute_binary_lcp(lcp)
+    print(suffix_array)
 
     while True:
         pattern = input()
-        #search the phrase
+        #search the pattern
         suffix_array_id = binary_search(text, suffix_array, pattern, lcp_left_right)
+        count = count_results(suffix_array_id, len(pattern), lcp)
         if suffix_array_id:
             print("Вхождение строки найдено на {} позиции".format(suffix_array_id))
+            print("Всего вхождений: {}".format(count))
         else:
             print("Вхождение строки не найдено!")
 
